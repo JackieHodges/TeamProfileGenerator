@@ -1,5 +1,6 @@
 const inquirer = require('inquirer');
 const Employee = require('./lib/Employee');
+const Manager = require('./lib/Manager');
 
 const questions = ["What is the team manager's name?", "What is his/her employee ID?", "What is his/her email address?"]
 
@@ -10,23 +11,23 @@ inquirer
     {
         type: 'input',
         message: questions[0],
-        name: 'teamManagerName',
+        name: 'enteredName',
     },
     {
         type: 'input',
         message: questions[1],
-        name: 'teamManagerID',
+        name: 'ID',
     },
     {
         type: 'input',
         message: questions[2],
-        name: 'teamManagerEmailAddress',
+        name: 'emailAddress',
     },
   ])
 
   .then((data) =>{
 
-    const newEmployee = new Employee(data.teamManagerName, data.teamManagerID, data.teamManagerEmailAddress);
+    const newEmployee = new Manager(data.enteredName, data.ID, data.emailAddress);
     newEmployee.printInfo();
 
   })
