@@ -1,8 +1,10 @@
+const { COMPLETIONSTATEMENT_TYPES } = require('@babel/types');
 const inquirer = require('inquirer');
 const Employee = require('./lib/Employee');
+const Engineer = require('./lib/Engineer');
 const Manager = require('./lib/Manager');
 
-const questions = ["What is the team manager's name?", "What is his/her employee ID?", "What is his/her email address?"]
+const questions = ["What is the team manager's name?", "What is his/her employee ID?", "What is his/her email address?", "Please select an employee to add:"]
 
 
 function init(){
@@ -27,11 +29,34 @@ inquirer
 
   .then((data) =>{
 
-    const newEmployee = new Manager(data.enteredName, data.ID, data.emailAddress);
-    newEmployee.printInfo();
+    const newManager = new Manager(data.enteredName, data.ID, data.emailAddress);
+    newEmployeeAdd();
 
   })
 
+}
+
+function newEmployeeAdd(){
+    inquirer
+        .prompt([
+            {
+                type: 'list',
+                choices: ["Engineer", "Intern", "N/A"],
+                message: questions[3],
+                name: 'newEmployee',
+            },
+        ])
+        .then((data) => {
+            if (data.newEmployee === "Engineer"){
+                console.log("Add Engineer");
+                newEmployeeAdd();
+            } else if (data.newEmployee === "Intern"){
+                console.log("Add Intern");
+                newEmployeeAdd();
+            } else {
+                return "Team finished";
+            }
+        })
 }
 
 init();
