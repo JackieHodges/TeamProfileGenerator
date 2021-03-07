@@ -2,6 +2,7 @@ const { COMPLETIONSTATEMENT_TYPES } = require('@babel/types');
 const inquirer = require('inquirer');
 const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 
 const questions = ["What is the team manager's name?", "What is his/her employee ID?", "What is his/her email address?", "Please select an employee to add:"]
@@ -81,12 +82,17 @@ function employeeQuestions(position){
         .then((data) => {
             if(position === "Engineer"){
                 const newEngineer = new Engineer(data.enteredName, data.ID, data.emailAddress);
-                newEmployeeAdd();
+                newEngineer.getGitHub();
             } else if (position === "Intern"){
-                console.log("create new intern");
-                newEmployeeAdd();
+                const newIntern  = new Intern(data.enteredName, data.ID, data.emailAddress);
+                newIntern.getSchool();
             }
         })
+
+        .then(() => {
+            newEmployeeAdd();
+        })
+
 }
 
 init();
