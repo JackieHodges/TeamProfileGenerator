@@ -7,9 +7,9 @@ const Manager = require('./lib/Manager');
 
 const questions = ["What is the team manager's name?", "What is his/her employee ID?", "What is his/her email address?", "Please select an employee to add:"]
 const newEmployeeQuestions = ["What is his/her name?", "What is his/her employee ID?", "What is his/her email address?"]
+let teamMembers = [];
 
 function init(){
-    new Promise((resolve, reject) => {
     inquirer
         .prompt([
             {
@@ -29,13 +29,15 @@ function init(){
             },
         ])
     .then((data) =>{
-            const newManagerInfo = new Manager(data.enteredName, data.ID, data.emailAddress);
-            resolve();
+        const newManagerInfo = new Manager(data.enteredName, data.ID, data.emailAddress);
+        let managerInfoString = JSON.stringify(newManagerInfo);
+        teamMembers.push(managerInfoString);
+        console.log("team members are " + teamMembers);
     })
-});
+    .then(newEmployeeAdd)
+}
 
-const newEmployeeAdd = () =>
-    new Promise((resolve, reject) => {
+function newEmployeeAdd () {
     inquirer
         .prompt([
             {
@@ -48,18 +50,17 @@ const newEmployeeAdd = () =>
         .then((data) => {
             if (data.newEmployee === "Engineer"){
                 console.log("Add Engineer");
-                resolve(data.newEmployee);
+                employeeQuestions(data.newEmployee);
             } else if (data.newEmployee === "Intern"){
                 console.log("Add Intern");
-                resolve(data.newEmployee);
+                employeeQuestions(data.newEmployee);
             } else {
                 return "Team finished";
             }
         })
-});
+}
 
-const employeeQuestions = (position) => {
-    new Promise(() => {
+function employeeQuestions (position) {
     inquirer
         .prompt([
             {
@@ -81,21 +82,13 @@ const employeeQuestions = (position) => {
         .then((data) => {
             if(position === "Engineer"){
                 const newEngineer = new Engineer(data.enteredName, data.ID, data.emailAddress);
-                newEngineer.getGitHub();
-                const message = `Engineer is added to team`;
-                return Promise.resolve(message);
+                newEngineer.getGitHub();    
             } else if (position === "Intern"){
                 const newIntern  = new Intern(data.enteredName, data.ID, data.emailAddress);
                 newIntern.getSchool();
-                const message = `Intern is added to team`;
-                return Promise.resolve(message);
             }
         })
+     
+}
 
-      
-});
-
-init()
-    .then(newEmployeeAdd)
-    .then(employeeQuestions)
-    .then(newEmployeeAdd);
+init();
