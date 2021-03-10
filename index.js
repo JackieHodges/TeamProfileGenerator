@@ -1,5 +1,7 @@
 const { COMPLETIONSTATEMENT_TYPES } = require('@babel/types');
 const inquirer = require('inquirer');
+const fs = require('fs');
+const generateHTMLFile = require('./src/generateHTML')
 const Employee = require('./lib/Employee');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
@@ -56,13 +58,13 @@ function newEmployeeAdd() {
                 engineerQuestions();
             } else if (data.newEmployee === "Intern") {
                 console.log("Add Intern");
-                internQuestions(data.newEmployee);
+                internQuestions();
             } else {
                 return "Team finished";
                 // build
+                let HTMLdata = generateHTMLFile.generateHTML(teamMembers);
             }
         })
-    // .then(employeeQuestions)
 }
 
 function engineerQuestions() {
@@ -129,6 +131,14 @@ function internQuestions() {
             newEmployeeAdd();
         })
 
+}
+
+function writeToFile(fileName, data) {
+
+    fs.writeFile(fileName, data, (err) =>
+    err ? console.error(err) : console.log("README Created")
+    );
+    
 }
 
 init();
