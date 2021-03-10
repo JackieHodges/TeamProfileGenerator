@@ -5,11 +5,11 @@ const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
 const Manager = require('./lib/Manager');
 
-const questions = ["What is the team manager's name?", "What is his/her employee ID?", "What is his/her email address?", "Please select an employee to add:"]
-const newEmployeeQuestions = ["What is his/her name?", "What is his/her employee ID?", "What is his/her email address?"]
+const questions = ["What is the team manager's name?", "What is his/her employee ID?", "What is his/her email address?", "What is his/her room number?", "Please select an employee to add:"]
+const newEmployeeQuestions = ["What is his/her name?", "What is his/her employee ID?", "What is his/her email address?", "What is his/her github username?", "What school do you attend?"]
+let teamMembers = [];
 
-function init(){
-    new Promise((resolve, reject) => {
+function init() {
     inquirer
         .prompt([
             {
@@ -27,39 +27,45 @@ function init(){
                 message: questions[2],
                 name: 'emailAddress',
             },
+            {
+                type: 'input',
+                message: questions[3],
+                name: 'roomNumber',
+            },
         ])
-    .then((data) =>{
-            const newManagerInfo = new Manager(data.enteredName, data.ID, data.emailAddress);
-            resolve();
-    })
-});
+        .then((data) => {
+            const newManagerInfo = new Manager(data.enteredName, data.ID, data.emailAddress, data.roomNumber);
+            teamMembers.push(newManagerInfo);
+            newEmployeeAdd();
+        })
+}
 
-const newEmployeeAdd = () =>
-    new Promise((resolve, reject) => {
+function newEmployeeAdd() {
     inquirer
         .prompt([
             {
                 type: 'list',
-                choices: ["Engineer", "Intern", "N/A"],
-                message: questions[3],
+                choices: ["Engineer", "Intern", "Build Team"],
+                message: questions[4],
                 name: 'newEmployee',
             },
         ])
         .then((data) => {
-            if (data.newEmployee === "Engineer"){
+            if (data.newEmployee === "Engineer") {
                 console.log("Add Engineer");
-                resolve(data.newEmployee);
-            } else if (data.newEmployee === "Intern"){
+                engineerQuestions();
+            } else if (data.newEmployee === "Intern") {
                 console.log("Add Intern");
-                resolve(data.newEmployee);
+                internQuestions(data.newEmployee);
             } else {
                 return "Team finished";
+                // build
             }
         })
-});
+    // .then(employeeQuestions)
+}
 
-const employeeQuestions = (position) => {
-    new Promise(() => {
+function engineerQuestions() {
     inquirer
         .prompt([
             {
@@ -77,25 +83,52 @@ const employeeQuestions = (position) => {
                 message: newEmployeeQuestions[2],
                 name: 'emailAddress',
             },
+            {
+                type: 'input',
+                message: newEmployeeQuestions[3],
+                name: 'gitHubUserName',
+            },
         ])
         .then((data) => {
-            if(position === "Engineer"){
-                const newEngineer = new Engineer(data.enteredName, data.ID, data.emailAddress);
-                newEngineer.getGitHub();
-                const message = `Engineer is added to team`;
-                return Promise.resolve(message);
-            } else if (position === "Intern"){
-                const newIntern  = new Intern(data.enteredName, data.ID, data.emailAddress);
-                newIntern.getSchool();
-                const message = `Intern is added to team`;
-                return Promise.resolve(message);
-            }
+            console.log("created new engineer")
+            const newEngineer = new Engineer(data.enteredName, data.ID, data.emailAddress, data.gitHubUserName);
+            teamMembers.push(newEngineer);
+            newEmployeeAdd();
         })
 
-      
-});
+}
 
-init()
-    .then(newEmployeeAdd)
-    .then(employeeQuestions)
-    .then(newEmployeeAdd);
+function internQuestions() {
+    inquirer
+        .prompt([
+            {
+                type: 'input',
+                message: newEmployeeQuestions[0],
+                name: 'enteredName',
+            },
+            {
+                type: 'input',
+                message: newEmployeeQuestions[1],
+                name: 'ID',
+            },
+            {
+                type: 'input',
+                message: newEmployeeQuestions[2],
+                name: 'emailAddress',
+            },
+            {
+                type: 'input',
+                message: newEmployeeQuestions[4],
+                name: 'schoolName',
+            },
+        ])
+        .then((data) => {
+            console.log("created new intern")
+            const newIntern = new Intern(data.enteredName, data.ID, data.emailAddress, data.schoolName);
+            teamMembers.push(newIntern);
+            newEmployeeAdd();
+        })
+
+}
+
+init();
