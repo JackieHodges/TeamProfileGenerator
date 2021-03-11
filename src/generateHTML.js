@@ -53,12 +53,11 @@ function createHTML(teamMembers){
     cards.push(card[i]);
     }
 console.log("cards is " + cards);
-generateHTML(cards);
 }
 
 
 // function to generate markdown for README
-function generateHTML(cards) {
+function generateHTML() {
     if (cards.length <=3){
         return `<!DOCTYPE html>
         <html lang="en">

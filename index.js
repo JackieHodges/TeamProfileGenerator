@@ -65,7 +65,8 @@ function newEmployeeAdd() {
                 console.log(teamMembers.length);
                 console.log(teamMembers[0]);
                 let createHTML = generateHTMLFile.createHTML(teamMembers);
-                // let HTMLdata = generateHTMLFile.generateHTML(teamMembers);
+                let HTMLdata = generateHTMLFile.generateHTML(teamMembers);
+                writeToFile("index.html", HTMLdata);
             }
         })
 }
@@ -139,7 +140,7 @@ function internQuestions() {
 function writeToFile(fileName, data) {
 
     fs.writeFile(fileName, data, (err) =>
-    err ? console.error(err) : console.log("README Created")
+    err ? console.error(err) : console.log("index.html created")
     );
     
 }
