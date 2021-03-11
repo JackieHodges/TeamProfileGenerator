@@ -60,9 +60,12 @@ function newEmployeeAdd() {
                 console.log("Add Intern");
                 internQuestions();
             } else {
-                return "Team finished";
                 // build
-                let HTMLdata = generateHTMLFile.generateHTML(teamMembers);
+                console.log(`Finished Team ${teamMembers}`)
+                console.log(teamMembers.length);
+                console.log(teamMembers[1]);
+                let createHTML = generateHTMLFile.createHTML(teamMembers);
+                // let HTMLdata = generateHTMLFile.generateHTML(teamMembers);
             }
         })
 }

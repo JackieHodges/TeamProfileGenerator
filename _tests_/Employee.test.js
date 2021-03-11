@@ -12,8 +12,37 @@ describe ("Employee", () => {
     })
 });
 
-test('can add name via constructor', () => {
+test('can add name, id, and email via constructor', () => {
     const name = "Jackie";
-    const employee = new Employee("Jackie");
+    const id = 234;
+    const email = "abc@gmail.com"
+    const employee = new Employee("Jackie", 234, "abc@gmail.com");
     expect(employee.name).toBe(name);
+    expect(employee.id).toBe(id);
+    expect(employee.email).toBe(email);
  });
+
+ test('getName function returns name', () => {
+    const employee = new Employee("Jackie", 234, "abc@gmail.com");
+
+    expect(employee.getName()).toBe(employee.name);
+ });
+
+ test('getID function returns ID number', () => {
+    const employee = new Employee("Jackie", 234, "abc@gmail.com");
+
+    expect(employee.getID()).toBe(234);
+ });
+
+ test('getEmail function returns email', () => {
+    const employee = new Employee("Jackie", 234, "abc@gmail.com");
+
+    expect(employee.getEmail()).toBe(employee.email);
+ });
+
+ test('getRole function returns role', () => {
+    const employee = new Employee("Jackie", 234, "abc@gmail.com");
+
+    expect(employee.getRole()).toBe("Employee");
+ });
+
