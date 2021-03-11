@@ -66,7 +66,7 @@ function newEmployeeAdd() {
                 console.log(teamMembers[0]);
                 let createHTML = generateHTMLFile.createHTML(teamMembers);
                 let HTMLdata = generateHTMLFile.generateHTML(teamMembers);
-                writeToFile("index.html", HTMLdata);
+                writeToFile("./dist/index.html", HTMLdata);
             }
         })
 }

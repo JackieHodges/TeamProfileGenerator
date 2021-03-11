@@ -106,6 +106,7 @@ function generateHTML() {
             ${cards[1]}
             ${cards[2]}
         </div>
+        <br>
         <div class="row">
             ${cards[3]}
             ${cards[4]}
@@ -137,11 +138,13 @@ function generateHTML() {
             ${cards[1]}
             ${cards[2]}
         </div>
+        <br>
         <div class="row">
             ${cards[3]}
             ${cards[4]}
             ${cards[5]}
         </div>
+        <br>
         <div class="row">
             ${cards[6]}
             ${cards[7]}
