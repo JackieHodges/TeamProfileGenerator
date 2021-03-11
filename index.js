@@ -63,7 +63,7 @@ function newEmployeeAdd() {
                 // build
                 console.log(`Finished Team ${teamMembers}`)
                 console.log(teamMembers.length);
-                console.log(teamMembers[1]);
+                console.log(teamMembers[0]);
                 let createHTML = generateHTMLFile.createHTML(teamMembers);
                 // let HTMLdata = generateHTMLFile.generateHTML(teamMembers);
             }
