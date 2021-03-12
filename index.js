@@ -67,9 +67,8 @@ function newEmployeeAdd() {
                 let createCards = generateHTMLFile.createCards(teamMembers);
                 let HTMLdata = generateHTMLFile.createBeginningHTML(teamMembers);
                 writeToFile("./dist/index.html", generateHTMLFile.createBeginningHTML());
-                // appendToFile("./dist/index.html", parseInt(generateHTMLFile.cardHTML()).toString());
-                // appendToFile("./dist/index.html", generateHTMLFile.cardHTML());
                 generateHTMLFile.cardHTML();
+                generateHTMLFile.createEndHtml();
             }
         })
 }
