@@ -61,9 +61,6 @@ function newEmployeeAdd() {
                 internQuestions();
             } else {
                 // build
-                console.log(`Finished Team ${teamMembers}`)
-                console.log(teamMembers.length);
-                console.log(teamMembers[0]);
                 let createCards = generateHTMLFile.createCards(teamMembers);
                 let HTMLdata = generateHTMLFile.createBeginningHTML(teamMembers);
                 writeToFile("./dist/index.html", generateHTMLFile.createBeginningHTML());

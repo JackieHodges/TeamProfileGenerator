@@ -33,7 +33,7 @@ function createCards(teamMembers){
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">ID: ${teamMembers[i].getID()}</li>
                     <li class="list-group-item">Email: <a href="mailto:${teamMembers[i].getEmail()}">${teamMembers[i].getEmail()}</a></li>      
-                    <li class="list-group-item">GitHub User Name: <a href="https://github.com/${teamMembers[i].gitHubUserName}" target="_blank">${teamMembers[i].gitHubUserName}</a></li>
+                    <li class="list-group-item">GitHub: <a href="https://github.com/${teamMembers[i].gitHubUserName}" target="_blank">${teamMembers[i].gitHubUserName}</a></li>
                 </ul>
             </div>
         </div>`} 
@@ -56,7 +56,6 @@ function createCards(teamMembers){
     }
     cards.push(card[i]);
     }
-console.log("cards is " + cards);
 }
 
 // create beginning HTML File
