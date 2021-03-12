@@ -64,9 +64,12 @@ function newEmployeeAdd() {
                 console.log(`Finished Team ${teamMembers}`)
                 console.log(teamMembers.length);
                 console.log(teamMembers[0]);
-                let createHTML = generateHTMLFile.createHTML(teamMembers);
-                let HTMLdata = generateHTMLFile.generateHTML(teamMembers);
-                writeToFile("./dist/index.html", HTMLdata);
+                let createCards = generateHTMLFile.createCards(teamMembers);
+                let HTMLdata = generateHTMLFile.createBeginningHTML(teamMembers);
+                writeToFile("./dist/index.html", generateHTMLFile.createBeginningHTML());
+                // appendToFile("./dist/index.html", parseInt(generateHTMLFile.cardHTML()).toString());
+                // appendToFile("./dist/index.html", generateHTMLFile.cardHTML());
+                generateHTMLFile.cardHTML();
             }
         })
 }
@@ -143,6 +146,12 @@ function writeToFile(fileName, data) {
     err ? console.error(err) : console.log("index.html created")
     );
     
+}
+
+function appendToFile(fileName, data){
+    fs.appendFile(fileName, data, (err) =>
+    err ? console.error(err) : console.log('Commit logged!')
+    );
 }
 
 init();
