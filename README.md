@@ -32,9 +32,10 @@ To install, follow these steps:
 
 ## Usage
 
-Below is a video of the typical user flow through of the application:
+Below is a video of the typical user flow through of the application and passed tests:
 
-![video](gif/READMEgif.gif)
+![video](Assets/walkthru.gif)
+
 
 
 ## Credits
